@@ -1,0 +1,1 @@
+/usr/bin/c++   -lboost_system -lssl -pthread -lboost_filesystem -lboost_thread -std=c++0x    -lboost_system -lssl -pthread -lboost_filesystem -lboost_thread   CMakeFiles/cppserver.dir/src/server.cpp.o  -o cppserver -rdynamic 

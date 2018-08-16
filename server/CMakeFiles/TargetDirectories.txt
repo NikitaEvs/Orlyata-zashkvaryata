@@ -1,0 +1,3 @@
+/home/hutu/cppserver/CMakeFiles/edit_cache.dir
+/home/hutu/cppserver/CMakeFiles/rebuild_cache.dir
+/home/hutu/cppserver/CMakeFiles/cppserver.dir
