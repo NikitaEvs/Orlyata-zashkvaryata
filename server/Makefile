@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/hutu/cppserver
+CMAKE_SOURCE_DIR = /home/hutu/Orlyata-zashkvaryata/server
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/hutu/cppserver
+CMAKE_BINARY_DIR = /home/hutu/Orlyata-zashkvaryata/server
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hutu/cppserver/CMakeFiles /home/hutu/cppserver/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hutu/Orlyata-zashkvaryata/server/CMakeFiles /home/hutu/Orlyata-zashkvaryata/server/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hutu/cppserver/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hutu/Orlyata-zashkvaryata/server/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named cppserver
+# Target rules for targets named server
 
 # Build rule for target.
-cppserver: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 cppserver
-.PHONY : cppserver
+server: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 server
+.PHONY : server
 
 # fast build rule for target.
-cppserver/fast:
-	$(MAKE) -f CMakeFiles/cppserver.dir/build.make CMakeFiles/cppserver.dir/build
-.PHONY : cppserver/fast
+server/fast:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
+.PHONY : server/fast
 
 src/server.o: src/server.cpp.o
 
@@ -129,7 +129,7 @@ src/server.o: src/server.cpp.o
 
 # target to build an object file
 src/server.cpp.o:
-	$(MAKE) -f CMakeFiles/cppserver.dir/build.make CMakeFiles/cppserver.dir/src/server.cpp.o
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server.cpp.o
 .PHONY : src/server.cpp.o
 
 src/server.i: src/server.cpp.i
@@ -138,7 +138,7 @@ src/server.i: src/server.cpp.i
 
 # target to preprocess a source file
 src/server.cpp.i:
-	$(MAKE) -f CMakeFiles/cppserver.dir/build.make CMakeFiles/cppserver.dir/src/server.cpp.i
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server.cpp.i
 .PHONY : src/server.cpp.i
 
 src/server.s: src/server.cpp.s
@@ -147,7 +147,7 @@ src/server.s: src/server.cpp.s
 
 # target to generate assembly for a file
 src/server.cpp.s:
-	$(MAKE) -f CMakeFiles/cppserver.dir/build.make CMakeFiles/cppserver.dir/src/server.cpp.s
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server.cpp.s
 .PHONY : src/server.cpp.s
 
 # Help Target
@@ -158,7 +158,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... cppserver"
+	@echo "... server"
 	@echo "... src/server.o"
 	@echo "... src/server.i"
 	@echo "... src/server.s"

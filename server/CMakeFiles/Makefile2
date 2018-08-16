@@ -54,45 +54,45 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/hutu/cppserver
+CMAKE_SOURCE_DIR = /home/hutu/Orlyata-zashkvaryata/server
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/hutu/cppserver
+CMAKE_BINARY_DIR = /home/hutu/Orlyata-zashkvaryata/server
 
 #=============================================================================
-# Target rules for target CMakeFiles/cppserver.dir
+# Target rules for target CMakeFiles/server.dir
 
 # All Build rule for target.
-CMakeFiles/cppserver.dir/all:
-	$(MAKE) -f CMakeFiles/cppserver.dir/build.make CMakeFiles/cppserver.dir/depend
-	$(MAKE) -f CMakeFiles/cppserver.dir/build.make CMakeFiles/cppserver.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/hutu/cppserver/CMakeFiles --progress-num=1,2 "Built target cppserver"
-.PHONY : CMakeFiles/cppserver.dir/all
+CMakeFiles/server.dir/all:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/depend
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/hutu/Orlyata-zashkvaryata/server/CMakeFiles --progress-num=1,2 "Built target server"
+.PHONY : CMakeFiles/server.dir/all
 
 # Include target in all.
-all: CMakeFiles/cppserver.dir/all
+all: CMakeFiles/server.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/cppserver.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hutu/cppserver/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/cppserver.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hutu/cppserver/CMakeFiles 0
-.PHONY : CMakeFiles/cppserver.dir/rule
+CMakeFiles/server.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hutu/Orlyata-zashkvaryata/server/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/server.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hutu/Orlyata-zashkvaryata/server/CMakeFiles 0
+.PHONY : CMakeFiles/server.dir/rule
 
 # Convenience name for target.
-cppserver: CMakeFiles/cppserver.dir/rule
+server: CMakeFiles/server.dir/rule
 
-.PHONY : cppserver
-
-# clean rule for target.
-CMakeFiles/cppserver.dir/clean:
-	$(MAKE) -f CMakeFiles/cppserver.dir/build.make CMakeFiles/cppserver.dir/clean
-.PHONY : CMakeFiles/cppserver.dir/clean
+.PHONY : server
 
 # clean rule for target.
-clean: CMakeFiles/cppserver.dir/clean
+CMakeFiles/server.dir/clean:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/clean
+.PHONY : CMakeFiles/server.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/server.dir/clean
 
 .PHONY : clean
 

@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/hutu/cppserver/src/server.cpp" "/home/hutu/cppserver/CMakeFiles/cppserver.dir/src/server.cpp.o"
+  "/home/hutu/Orlyata-zashkvaryata/server/src/server.cpp" "/home/hutu/Orlyata-zashkvaryata/server/CMakeFiles/server.dir/src/server.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

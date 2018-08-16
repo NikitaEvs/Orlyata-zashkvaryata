@@ -6,13 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/home/hutu/cppserver/src/server.cpp
+/home/hutu/Orlyata-zashkvaryata/server/src/server.cpp
 websocketpp/config/asio_no_tls.hpp
 -
 websocketpp/server.hpp
 -
 json/json.hpp
-/home/hutu/cppserver/src/json/json.hpp
+/home/hutu/Orlyata-zashkvaryata/server/src/json/json.hpp
 iostream
 -
 set

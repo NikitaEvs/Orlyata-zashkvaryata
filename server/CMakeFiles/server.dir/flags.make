@@ -6,5 +6,5 @@ CXX_FLAGS = -lboost_system -lssl -pthread -lboost_filesystem -lboost_thread -std
 
 CXX_DEFINES = -DBOOST_ERROR_CODE_HEADER_ONLY
 
-CXX_INCLUDES = -I/home/hutu/cppserver/thirdparty 
+CXX_INCLUDES = -I/home/hutu/Orlyata-zashkvaryata/server/thirdparty 
 
