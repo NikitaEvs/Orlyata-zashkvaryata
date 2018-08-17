@@ -3,6 +3,7 @@
 
 CMakeFiles/server.dir/src/server.cpp.o: src/server.cpp
 CMakeFiles/server.dir/src/server.cpp.o: thirdparty/json/json.hpp
+CMakeFiles/server.dir/src/server.cpp.o: thirdparty/sqlite_orm/sqlite_orm.h
 CMakeFiles/server.dir/src/server.cpp.o: thirdparty/websocketpp/base64/base64.hpp
 CMakeFiles/server.dir/src/server.cpp.o: thirdparty/websocketpp/close.hpp
 CMakeFiles/server.dir/src/server.cpp.o: thirdparty/websocketpp/common/asio.hpp

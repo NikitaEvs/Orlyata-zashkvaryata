@@ -1,1 +1,1 @@
-/usr/bin/c++   -lboost_system -lssl -pthread -lboost_filesystem -lboost_thread -std=c++0x    -lboost_system -lssl -pthread -lboost_filesystem -lboost_thread   CMakeFiles/server.dir/src/server.cpp.o  -o server -rdynamic 
+/usr/bin/c++   -lboost_system -lssl -pthread -lboost_filesystem -lboost_thread -ldl -lsqlite3 -std=c++0x    -lboost_system -lssl -pthread -lboost_filesystem -lboost_thread -ldl -lsqlite3    CMakeFiles/server.dir/src/server.cpp.o  -o server -rdynamic -lsqlite3 -ldl 

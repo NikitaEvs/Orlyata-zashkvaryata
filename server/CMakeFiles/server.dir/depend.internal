@@ -4,6 +4,7 @@
 CMakeFiles/server.dir/src/server.cpp.o
  /home/hutu/Orlyata-zashkvaryata/server/src/server.cpp
  thirdparty/json/json.hpp
+ thirdparty/sqlite_orm/sqlite_orm.h
  thirdparty/websocketpp/base64/base64.hpp
  thirdparty/websocketpp/close.hpp
  thirdparty/websocketpp/common/asio.hpp
