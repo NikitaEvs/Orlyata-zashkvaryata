@@ -11,6 +11,7 @@
 #include <vector>
 #include <string.h>
 #include <ctime>
+#include <unistd.h>
 
 using websocketpp::connection_hdl;
 using websocketpp::lib::placeholders::_1;
@@ -589,8 +590,8 @@ class pineServer {
 			std::cout << "Start messages out process" << std::endl;
 			bool start = true;
 			while(true) {
-				database pineBase(true);
-				if(pineHandlers.size() > 0 && (valDatabaseUpdate || start)) {
+				//database pineBase(true);
+				if(pineHandlers.size() > 0 /*&& (valDatabaseUpdate || start)*/) {
 					sendData();
 					start = false;
 					/* For tests 
@@ -599,6 +600,7 @@ class pineServer {
 						currentServer.send(itMap -> second, "kek", websocketpp::frame::opcode::text, errCode);
 					} */
 				}
+				sleep(3);
 			}
 		}
 
@@ -607,16 +609,18 @@ class pineServer {
 			return !hdl1.owner_before(hdl2) && !hdl2.owner_before(hdl1);
 		}
 
-		std::string getPkgOut(std::vector<std::string> types, std::vector<int> values, std::string timestamp) {
+		std::string getPkgOut(std::vector<std::string> types, std::vector<int> values, std::string timestamp, int val) {
 			json jOut;
 			jOut["event"] = "data_m";
 			jOut["data"]["types"] = types;
 			jOut["data"]["values"] = values;
 			jOut["data"]["timestamp"] = timestamp;
+			jOut["data"]["val"] = val;
 			return jOut.dump();
 		}
 
 		void sendData() {
+			std::cout << "PineHandlers size: " << pineHandlers.size() << std::endl;
 			for(auto itMap = pineHandlers.begin(); itMap != pineHandlers.end(); ++itMap) {
 				std::cout << "Send data in map" << std::endl;
 				websocketpp::lib::error_code errCode;
@@ -629,9 +633,9 @@ class pineServer {
 				std::vector<std::string> timestamps = formatter.strToTimestamps(currentValBox.timestamps);
 				for(int i = 0; i < types.size(); i++) {
 					std::cout << "currentVal fori" << std::endl;
-					if(!currentValBox.sent && i >= currentValBox.val) {
+					if(/*!currentValBox.sent &&*/ i >= currentConnections[currentValBox.token]) {
 						std::cout << "Send data!" << std::endl;
-						std::string outData = getPkgOut(types[i], values[i], timestamps[i]);
+						std::string outData = getPkgOut(types[i], values[i], timestamps[i], ++currentConnections[currentValBox.token]);
 						std::cout << "Out data: " << outData << std::endl;
 						currentServer.send(itMap -> second, outData, websocketpp::frame::opcode::text, errCode);
 						pineBase.updateItemSent(currentValBox.token, true);
@@ -663,6 +667,8 @@ class pineServer {
 				authCheck check(jIn["data"]["login"], jIn["data"]["password"]);
 				if(check.getIsAuth()) {
 					pineHandlers[check.getCurrentToken()] = handlerCur;
+					currentConnections[check.getCurrentToken()] = jIn["data"]["val"];
+					std::cout << "Val: " << jIn["data"]["val"] << std::endl;
 					jOut["data"]["response"] = "ok";
 					con_list.insert(handlerCurrent);					
 				} else {
@@ -694,6 +700,7 @@ class pineServer {
 		mutex connection_lock;
 		std::queue<action> actions;
 		std::map<int, websocketpp::connection_hdl> pineHandlers;
+		std::map<int, int> currentConnections;
 		condition_variable action_cond;
 		server::message_ptr msgIn;
 		websocketpp::connection_hdl handlerCurrent;
