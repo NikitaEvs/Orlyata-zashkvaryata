@@ -691,7 +691,6 @@ class pineServer {
 					} else {
 						jOut["data"]["response"] = "fail";
 					}
-					jOut["data"]["response"] = "ok";
 				} catch (...) {
 					jOut["data"]["response"] = "fail";
 				}
