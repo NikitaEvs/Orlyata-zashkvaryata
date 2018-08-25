@@ -397,15 +397,16 @@ class database {
 			storage.sync_schema();
 		}
 
-		bool updateItemReg(std::string name, std::string login, std::string password) {
+		bool updateItemReg(std::string name, std::string email, std::string login, std::string password) {
 			std::cout << "Update reg info" << std::endl;
 			decltype(initDatabase()) storage = initDatabase();
 			pineBox editedPine = givePineFromName(name);
-			if((editedPine.login != "") || (editedPine.password != "")) {
+			if((editedPine.login != "") || (editedPine.password != "") || (editedPine.token == -1)) {
 				return false;
 			}
 			editedPine.login = login;
 			editedPine.password = password;
+			editedPine.email = email;
 			storage.update(editedPine);
 			storage.sync_schema();
 			return true;
@@ -440,7 +441,13 @@ class database {
 			using namespace sqlite_orm;
 			std::cout << "Give Pine via name" << std::endl;
 			decltype(initDatabase()) storage = initDatabase();
-			return storage.get_all<pineBox>(where(c(&pineBox::name) == name)).front(); 
+			pineBox pine;
+			pine.token = -1;
+			if(storage.get_all<pineBox>(where(c(&pineBox::name) == name)).size()>0){
+				return storage.get_all<pineBox>(where(c(&pineBox::name) == name)).front(); 
+			} else {
+				return pine;
+			}
 		}
 
 		pineBoxVal givePineVal(int token) {
@@ -679,7 +686,7 @@ class pineServer {
 				jOut["event"] = "reg_resp_s_m";
 				try {
 					database pineBase;
-					if(pineBase.updateItemReg(jIn["data"]["name"], jIn["data"]["login"], jIn["data"]["password"])) {
+					if(pineBase.updateItemReg(jIn["data"]["name"], jIn["data"]["email"], jIn["data"]["login"], jIn["data"]["password"])) {
 						jOut["data"]["response"] = "ok";
 					} else {
 						jOut["data"]["response"] = "fail";
