@@ -667,14 +667,14 @@ class pineServer {
 		}
 
 		void saveData(std::string data){
-			std::string name = "data\\"+getTime()+".csv";
+			std::string name = "data/"+getTime()+".csv";
 			fOut.open(name);
 			fOut << data;
 			fOut.close();
 		}
 
 		void saveDataArr(std::vector<std::string> data) {
-			std::string name = "data\\"+getTime()+".csv";
+			std::string name = "data/"+getTime()+".csv";
 			fOut.open(name);
 			for(auto s:data) {
 				fOut << s;
