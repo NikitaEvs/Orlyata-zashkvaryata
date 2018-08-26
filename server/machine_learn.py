@@ -92,5 +92,6 @@ while 1:
         Ans = pd.DataFrame()
         Ans['I'] = X_test['12']
         Ans['Ans'] = model.predict(X_test)
-        Ans.to_csv(file.name, index=False)
+        Ans.to_csv('ans'+file.name, index=False)
+	os.remove('file.name');
 
