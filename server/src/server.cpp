@@ -12,6 +12,7 @@
 #include <string.h>
 #include <ctime>
 #include <unistd.h>
+#include <fstream>
 
 using websocketpp::connection_hdl;
 using websocketpp::lib::placeholders::_1;
@@ -40,6 +41,7 @@ std::string giveCount = "GIVEC"; // Give count of elements in database
 /* -----------------------*/
 const int port = 8080;
 bool valDatabaseUpdate = false;
+std::ofstream fOut;
 
 enum action_type {
 	SUBSCRIBE,
@@ -663,6 +665,10 @@ class pineServer {
 		std::string getMsgOut() {
 			return msgOut;
 		}
+/*
+		void saveData(std::vector data){
+			//fOut
+		}*/
 
 		void analyzeMsgIn(websocketpp::connection_hdl handlerCur) {
 			json jIn = json::parse(msgIn -> get_payload());
@@ -694,6 +700,12 @@ class pineServer {
 				} catch (...) {
 					jOut["data"]["response"] = "fail";
 				}
+				msgOut = jOut.dump();
+			} else if(event == "data_pi") {
+				std::cout << "Give data from Pi" << std::endl;
+				// TODO convert data to file
+				jOut["event"] = "data_pi_req";
+				jOut["data"] = "";
 				msgOut = jOut.dump();
 			}
 		} 
