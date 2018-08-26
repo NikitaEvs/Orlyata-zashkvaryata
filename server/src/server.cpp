@@ -665,10 +665,22 @@ class pineServer {
 		std::string getMsgOut() {
 			return msgOut;
 		}
-/*
-		void saveData(std::vector data){
-			//fOut
-		}*/
+
+		void saveData(std::string data){
+			std::string name = "data"+getTime()+".csv";
+			fOut.open(name);
+			fOut << data;
+			fOut.close();
+		}
+
+		void saveDataArr(std::vector<std::string> data) {
+			std::string name = "data"+getTime()+".csv";
+			fOut.open(name);
+			for(auto s:data) {
+				fOut << s;
+			}
+			fOut.close();
+		}
 
 		void analyzeMsgIn(websocketpp::connection_hdl handlerCur) {
 			json jIn = json::parse(msgIn -> get_payload());
@@ -703,7 +715,7 @@ class pineServer {
 				msgOut = jOut.dump();
 			} else if(event == "data_pi") {
 				std::cout << "Give data from Pi" << std::endl;
-				// TODO convert data to file
+				saveData(jIn["data"]["values"]);
 				jOut["event"] = "data_pi_req";
 				jOut["data"] = "";
 				msgOut = jOut.dump();
