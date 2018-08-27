@@ -755,7 +755,7 @@ class pineServer {
 		}
 
 		void saveData(std::string data, int token){
-			std::string name = "data/"+'a'+token+'a'+getTime()+".csv";
+			std::string name = "data/"+getTime()+'a'+std::to_string(token)+'a'+".csv";
 			std::cout << name << std::endl;
 			fOut.open(name);
 			fOut << data;
@@ -763,7 +763,7 @@ class pineServer {
 		}
 
 		void saveDataArr(std::vector<std::string> data, int token) {
-			std::string name = "data/"+'a'+token+'a'+getTime()+".csv";
+			std::string name = "data/"+getTime()+'a'+std::to_string(token)+'a'+".csv";
 			std::cout << name << std::endl;
 			fOut.open(name);
 			for(auto s:data) {
