@@ -658,6 +658,7 @@ class pineServer {
 							pineHandlers.erase(token);
 							database pineBase;
 							pineBase.updateItem(token, false);
+							pineBase.updateItemVal(token, currentConnections[token]);
 							goto exitFromForI; // Very sorry for this
 						} else {
 							std::cout << "false" << std::endl;
@@ -690,7 +691,7 @@ class pineServer {
 						currentServer.send(itMap -> second, "kek", websocketpp::frame::opcode::text, errCode);
 					} */
 				}
-				sleep(3);
+				sleep(10);
 			}
 		}
 
@@ -734,8 +735,8 @@ class pineServer {
 						std::string outData = getPkgOut(types[i], values[i], timestamps[i], currentConnections[currentValBox.token]);
 						std::cout << "Out data: " << outData << std::endl;
 						currentServer.send(itMap -> second, outData, websocketpp::frame::opcode::text, errCode);
-						pineBase.updateItemSent(currentValBox.token, true);
-						pineBase.updateItemVal(currentValBox.token, ++currentValBox.val);
+						//pineBase.updateItemSent(currentValBox.token, true);
+						//pineBase.updateItemVal(currentValBox.token, ++currentValBox.val);
 					}
 				}
 			}
