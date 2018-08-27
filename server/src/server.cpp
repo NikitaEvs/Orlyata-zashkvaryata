@@ -487,6 +487,7 @@ class database {
 						std::cout << "Continue 2" << std::endl;
 						typeT.push_back(std::to_string(type));
 						types.push_back(typeT);
+						std::string timeStmp = names[0].substr(2, 100);
 						std::cout << " timestamp: " << names[0] << std::endl;
 						timestamps.push_back(names[0]);
 						std::cout << "Finish test code" << std::endl;
