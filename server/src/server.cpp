@@ -139,7 +139,7 @@ class reformat {
 		}
 
 		std::vector<std::vector<std::string> > strToTypes(std::string in) {
-			std::cout << "Reformat to type, inStr: " << in << std::endl;
+			//std::cout << "Reformat to type, inStr: " << in << std::endl;
 			std::vector<std::vector<std::string> > out;
 			std::vector<std::string> temp = split(in, '|');
 			for(int i = 0; i < temp.size(); i++) {
@@ -487,10 +487,8 @@ class database {
 						std::cout << "Continue 2" << std::endl;
 						typeT.push_back(std::to_string(type));
 						types.push_back(typeT);
-						std::vector<std::string> timeSt = formatter.split(names[2],'c');
-						timeSt[0] = timeSt[0].substr(0, timeSt[0].size() - 1);
-						std::cout << " timestamp: " << timeSt[0] << std::endl;
-						timestamps.push_back(timeSt[0]);
+						std::cout << " timestamp: " << names[0] << std::endl;
+						timestamps.push_back(names[0]);
 						std::cout << "Finish test code" << std::endl;
 						/* END TEST CODE */
 						addToElement(token, types, values, timestamps);
