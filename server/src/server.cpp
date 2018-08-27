@@ -465,7 +465,7 @@ class database {
 						std::getline(ansIn, buff);
 						std::getline(ansIn, buff);
 						reformat formatter;
-						std::vector<std::string> names = formatter.split(name, 't');
+						std::vector<std::string> names = formatter.split(name, 'a');
 						std::cout << buff << std::endl;
 						std::vector<std::string> data = formatter.split(buff, ',');
 						std::cout << "Size data: " << data.size();
@@ -755,14 +755,14 @@ class pineServer {
 		}
 
 		void saveData(std::string data, int token){
-			std::string name = "data/"+'t'+token+'t'+getTime()+".csv";
+			std::string name = "data/"+'a'+token+'a'+getTime()+".csv";
 			fOut.open(name);
 			fOut << data;
 			fOut.close();
 		}
 
 		void saveDataArr(std::vector<std::string> data, int token) {
-			std::string name = "data/"+'t'+token+'t'+getTime()+".csv";
+			std::string name = "data/"+'a'+token+'a'+getTime()+".csv";
 			fOut.open(name);
 			for(auto s:data) {
 				fOut << s;
