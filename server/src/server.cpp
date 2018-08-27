@@ -12,6 +12,7 @@
 #include <string.h>
 #include <ctime>
 #include <unistd.h>
+#include <dirent.h>
 #include <fstream>
 
 using websocketpp::connection_hdl;
@@ -106,7 +107,7 @@ class reformat {
 				for(int j = 0; j < types[i].size(); j++) {
 					out += types[i][j] + prob;
 				}
-				out += diff + prob;
+				out += diff;
 			}
 			return out;
 		}
@@ -138,11 +139,20 @@ class reformat {
 		}
 
 		std::vector<std::vector<std::string> > strToTypes(std::string in) {
+			std::cout << "Reformat to type, inStr: " << in << std::endl;
 			std::vector<std::vector<std::string> > out;
 			std::vector<std::string> temp = split(in, '|');
 			for(int i = 0; i < temp.size(); i++) {
-				out.push_back(split(temp[i], ' '));
+				std::vector<std::string> tempSplit = split(temp[i], ' ');
+				for(int j = 0; j < tempSplit.size(); j++) {
+					if(tempSplit[j] == " ") {
+						tempSplit.erase(tempSplit.begin() + j);
+					}
+				}
+				out.push_back(tempSplit);
 			}
+			
+			std::cout << "Reformat to type, out size: " << out.size() << std::endl;
 			return out;
 		}
 
@@ -170,6 +180,9 @@ class reformat {
 					buff = "";
 				}
 			}
+			if(buff != ""){
+				v.push_back(buff);
+			}
 			return v;
 		}
 
@@ -183,6 +196,26 @@ class reformat {
 					v.push_back(std::stoi(buff));
 					buff = "";
 				}
+			}
+			if(buff != ""){
+				v.push_back(std::stoi(buff));
+			}
+			return v;
+		}
+		
+		std::vector<double> splitToDouble(std::string s, char c) {
+			std::string buff("");
+			std::vector<double> v;
+			for(auto n:s) {
+				if(n != c) {
+					buff += n;
+				} else if(n == c && buff != "") {
+					v.push_back(std::stod(buff));
+					buff = "";
+				}
+			}
+			if(buff != ""){
+				v.push_back(std::stod(buff));
 			}
 			return v;
 		}
@@ -419,6 +452,55 @@ class database {
 			decltype(initDatabase()) storage = initDatabase();
 			return storage.get_all<pineBox>().size();
 		}
+
+		void getAns() {
+			DIR *dir;
+			struct dirent *ent;
+			if((dir = opendir("ans")) != NULL) {
+				while((ent = readdir (dir)) != NULL) {
+					std::string name = ent -> d_name;
+					if(name[0] == 'a') {
+						std::string buff;
+						std::ifstream ansIn("ans/"+name);
+						std::getline(ansIn, buff);
+						std::getline(ansIn, buff);
+						reformat formatter;
+						std::vector<std::string> names = formatter.split(name, 't');
+						std::cout << buff << std::endl;
+						std::vector<std::string> data = formatter.split(buff, ',');
+						std::cout << "Size data: " << data.size();
+						int token = std::stoi(names[1]);
+						std::vector<std::vector<std::string> > types;
+						std::vector<std::vector<int> > values;
+						std::vector<std::string> timestamps;
+						// TODO Refactor to values and types
+						/* START TEST CODE */
+						std::cout << "Start test code" << std::endl;
+						int val = std::stod(data[0])*1000;
+						int type = std::stod(data[1]);
+						std::cout << "token: " << token << " val: " << val << " type: " << type;
+						std::vector<int> valueT;
+						std::vector<std::string> typeT;
+						std::cout << "Continue 1" << std::endl;
+						valueT.push_back(val);
+						values.push_back(valueT);
+						std::cout << "Continue 2" << std::endl;
+						typeT.push_back(std::to_string(type));
+						types.push_back(typeT);
+						std::vector<std::string> timeSt = formatter.split(names[2],'c');
+						timeSt[0] = timeSt[0].substr(0, timeSt[0].size() - 1);
+						std::cout << " timestamp: " << timeSt[0] << std::endl;
+						timestamps.push_back(timeSt[0]);
+						std::cout << "Finish test code" << std::endl;
+						/* END TEST CODE */
+						addToElement(token, types, values, timestamps);
+					}
+				}
+				closedir(dir);
+			} else {
+				std::cout << "Could not open" << std::endl;
+			}
+		}
 		
 		pineBox givePine(int token) {
 			std::cout << "Give Pine info" << std::endl;
@@ -628,6 +710,7 @@ class pineServer {
 			return jOut.dump();
 		}
 
+
 		void sendData() {
 			std::cout << "PineHandlers size: " << pineHandlers.size() << std::endl;
 			for(auto itMap = pineHandlers.begin(); itMap != pineHandlers.end(); ++itMap) {
@@ -644,7 +727,12 @@ class pineServer {
 					std::cout << "currentVal fori" << std::endl;
 					if(/*!currentValBox.sent &&*/ i >= currentConnections[currentValBox.token]) {
 						std::cout << "Send data!" << std::endl;
-						std::string outData = getPkgOut(types[i], values[i], timestamps[i], ++currentConnections[currentValBox.token]);
+						std::cout << "Token2: " << currentValBox.token << std::endl;
+						int tempToken = currentConnections[currentValBox.token];
+						currentConnections[currentValBox.token] = tempToken + 1;
+						std::cout << tempToken + 1 << std::endl;
+						std::cout << "types size: " << types.size() << " value size: " << values.size() << " timestamps size: " << timestamps.size();
+						std::string outData = getPkgOut(types[i], values[i], timestamps[i], currentConnections[currentValBox.token]);
 						std::cout << "Out data: " << outData << std::endl;
 						currentServer.send(itMap -> second, outData, websocketpp::frame::opcode::text, errCode);
 						pineBase.updateItemSent(currentValBox.token, true);
@@ -666,15 +754,15 @@ class pineServer {
 			return msgOut;
 		}
 
-		void saveData(std::string data){
-			std::string name = "data/"+getTime()+".csv";
+		void saveData(std::string data, int token){
+			std::string name = "data/"+'t'+token+'t'+getTime()+".csv";
 			fOut.open(name);
 			fOut << data;
 			fOut.close();
 		}
 
-		void saveDataArr(std::vector<std::string> data) {
-			std::string name = "data/"+getTime()+".csv";
+		void saveDataArr(std::vector<std::string> data, int token) {
+			std::string name = "data/"+'t'+token+'t'+getTime()+".csv";
 			fOut.open(name);
 			for(auto s:data) {
 				fOut << s;
@@ -692,6 +780,7 @@ class pineServer {
 				authCheck check(jIn["data"]["login"], jIn["data"]["password"]);
 				if(check.getIsAuth()) {
 					pineHandlers[check.getCurrentToken()] = handlerCur;
+					std::cout << "Token1: " << check.getCurrentToken() << std::endl;
 					currentConnections[check.getCurrentToken()] = jIn["data"]["val"];
 					std::cout << "Val: " << jIn["data"]["val"] << std::endl;
 					jOut["data"]["response"] = "ok";
@@ -715,10 +804,12 @@ class pineServer {
 				msgOut = jOut.dump();
 			} else if(event == "data_pi") {
 				std::cout << "Give data from Pi" << std::endl;
-				saveData(jIn["data"]["values"]);
+				saveData(jIn["data"]["values"], jIn["data"]["token"]);
 				jOut["event"] = "data_pi_req";
 				jOut["data"] = "";
 				msgOut = jOut.dump();
+				database pineBase;
+				pineBase.getAns();
 			}
 		} 
 		
@@ -750,6 +841,9 @@ int main(int argc, char *argv[]) {
 	if(argc > 1){
 		std::string in = argv[1];
 		if(in == debug) {
+		
+			//pineBase.getAns();
+		
 			std::string input = "";
 			std::cout << "*******************************" << std::endl;
 			std::cout << "*******START DEBUG MODE!*******" << std::endl;
@@ -860,7 +954,7 @@ int main(int argc, char *argv[]) {
 					valuesFin.push_back(values);
 					typesFin.push_back(types);
 					valuesFin.push_back(values);
-					pineBase.addToElement(token, typesFin, valuesFin, timestamps);
+					pineBase.addToElement(token, typesFin, valuesFin, timestamps);	
 				} else if(input == help) {
 					std::cout << "*************************************" << std::endl;
 					std::cout << "*Info about all debug command:      *" << std::endl;
