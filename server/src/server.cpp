@@ -495,8 +495,9 @@ class database {
 						/* END TEST CODE */
 						addToElement(token, types, values, timestamps);
 					}
+					std::string fullName = "ans/" + name;
 					char fileName[100];
-					strcpy(fileName, name.c_str());
+					strcpy(fileName, fullName.c_str());
 					if(std::remove(fileName) != 0) {
 						std::cout << "Error with deleting" << std::endl;
 					}
