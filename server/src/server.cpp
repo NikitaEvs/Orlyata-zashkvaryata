@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include <dirent.h>
 #include <fstream>
+#include <stdio.h>
 
 using websocketpp::connection_hdl;
 using websocketpp::lib::placeholders::_1;
@@ -493,6 +494,11 @@ class database {
 						std::cout << "Finish test code" << std::endl;
 						/* END TEST CODE */
 						addToElement(token, types, values, timestamps);
+					}
+					char fileName[100];
+					strcpy(fileName, name.c_str());
+					if(std::remove(fileName) != 0) {
+						std::cout << "Error with deleting" << std::endl;
 					}
 				}
 				closedir(dir);

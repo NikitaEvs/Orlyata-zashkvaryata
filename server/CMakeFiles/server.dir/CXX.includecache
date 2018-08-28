@@ -33,6 +33,8 @@ dirent.h
 -
 fstream
 -
+stdio.h
+-
 
 thirdparty/json/json.hpp
 algorithm
