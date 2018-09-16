@@ -830,6 +830,7 @@ class pineServer {
 				database pineBase;
 				pineBase.getAns();
 				if((currentCountVariables > 0) && (currentIndexVariable < currentCountVariables)) {
+					std::cout << "Current index: " << currentIndexMeasure << " Current count: " << currentCountMeasures << std::endl;
 					if(currentIndexMeasure == currentCountMeasures) {
 						// Save one pkg
 						std::string name = "";
