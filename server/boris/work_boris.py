@@ -17,14 +17,14 @@ model = CatBoostClassifier()
 model.load_model(name)
 
 while 1:
-        for file in os.listdir("/home/energogroup/Orlyata-zashkvaryata/server/data"):
+        for file in os.listdir("/root/Orlyata-zashkvaryata/server/data"):
                 if file.endswith(".csv"):
-                        x_test = pd.read_csv(os.path.join("/home/energogroup/Orlyata-zashkvaryata/server/data", file))
+                        x_test = pd.read_csv(os.path.join("/root/Orlyata-zashkvaryata/server/data", file))
                         Ans = pd.DataFrame()
-                        Ans['I'] = x_test['12']
+                        Ans['I'] = x_test['11']
                         Ans['Ans'] = model.predict(x_test)
-                        Ans.to_csv('/home/energogroup/Orlyata-zashkvaryata/server/ans/ans'+file, index=False)
-                        os.remove("/home/energogroup/Orlyata-zashkvaryata/server/data/"+file)
+                        Ans.to_csv('/root/Orlyata-zashkvaryata/server/ans/ans'+file, index=False)
+                        os.remove("/root/Orlyata-zashkvaryata/server/data/"+file)
 
 
 
