@@ -51,8 +51,8 @@ int currentIndexVariable = 0;
 int currentIndexMeasure = 0;
 int currentCountVariables = 0;
 int currentCountMeasures = 0;
-std::string pkgHat = "1,2,3,4,5,6,7,8,9,10,11,12,Ans" + '\n';
-std::string currentPkg = pkgHat;
+//std::string pkgHat = "1,2,3,4,5,6,7,8,9,10,11,12,Ans" + '\n';
+std::string currentPkg = "1,2,3,4,5,6,7,8,9,10,11,12,Ans" + '\n';
 std::string currentDatasetName = "";
 
 enum action_type {
@@ -844,7 +844,7 @@ class pineServer {
 						fOut.close();
 						currentIndexVariable++;
 						currentIndexMeasure = 0;
-						currentPkg = pkgHat;
+						currentPkg = "1,2,3,4,5,6,7,8,9,10,11,12,Ans" + '\n';
 						std::cout << "PkgHat in current pkg: " << currentPkg << std::endl;
 						std::cout << "Pkg with number " << currentIndexVariable << " of " << currentCountVariables << " saved in csv" << std::endl;
 						std::cout << "Name of pkg: " << name << std::endl;
