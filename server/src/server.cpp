@@ -836,7 +836,7 @@ class pineServer {
 						if(currentIndexVariable = 0) {
 							name += "boris/learn/" + currentDatasetName+ "/out.csv";
 						} else {
-							name += "boris/learn/" + currentDatasetName+ "/out" + std::to_string(currentIndexMeasure) + ".csv";
+							name += "boris/learn/" + currentDatasetName+ "/out" + std::to_string(currentIndexVariable) + ".csv";
 						}
 						fOut.open(name);
 						fOut << currentPkg;
@@ -846,9 +846,12 @@ class pineServer {
 						currentPkg = pkgHat;
 						std::cout << "Pkg with number " << currentIndexVariable << " of " << currentCountVariables << " saved in csv" << std::endl;
 						std::cout << "Name of pkg: " << name << std::endl;
-						std::cout << "Please, plug new combination. When you are ready press ENTER" << std::endl;
-						std::string tempBuffer;
-						getline(std::cin, tempBuffer);
+						if(currentIndexVariable < currentCountVariables) {
+							std::cout << "Please, plug new combination. When you are ready press ENTER" << std::endl;
+							std::string tempBuffer;
+							getline(std::cin, tempBuffer);
+						}
+						
 					} else {
 						// Add measure to pkg
 						std::string jValues = jIn["data"]["values"];
@@ -1029,6 +1032,7 @@ int main(int argc, char *argv[]) {
 			std::cout << "***********!WARNING!***********" << std::endl;
 			std::cout << "**IT'S EXPERIMENTAL FUNCTION!**" << std::endl;
 			std::cout << "*******************************" << std::endl;
+			std::cout << "Zero step: create directory of you new dataset" << std::endl;
 			std::cout << "First step: type count of variable of connection" << std::endl;
 			std::cout << "count of variable: ";
 			getline(std::cin, input);
@@ -1039,7 +1043,7 @@ int main(int argc, char *argv[]) {
 			countMeasures = std::stoi(input);
 			currentCountVariables = countVariables;
 			currentCountMeasures = countMeasures;
-			std::cout << "Last step: type name of new dataset (check exists datasets)" << std::endl;
+			std::cout << "Last step: type name of new dataset (check that diectory has already created)" << std::endl;
 			std::cout << "name: ";
 			getline(std::cin, input);
 			currentDatasetName = input;
