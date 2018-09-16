@@ -1,0 +1,6 @@
+/ans/ans*
+/data/data*
+*.cmake
+#*.sqlite
+Makefile
+CMakeFiles
