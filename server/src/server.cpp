@@ -831,7 +831,7 @@ class pineServer {
 				pineBase.getAns();
 				if((currentCountVariables > 0) && (currentIndexVariable < currentCountVariables)) {
 					std::cout << "Current index: " << currentIndexMeasure + 1 << " Current count: " << currentCountMeasures << std::endl;
-					if(currentIndexMeasure + 1 == currentCountMeasures) {
+					if(currentIndexMeasure == currentCountMeasures) {
 						// Save one pkg
 						std::string name = "";
 						if(currentIndexVariable == 0) {
@@ -845,6 +845,7 @@ class pineServer {
 						currentIndexVariable++;
 						currentIndexMeasure = 0;
 						currentPkg = pkgHat;
+						std::cout << "PkgHat in current pkg: " << currentPkg << std::endl;
 						std::cout << "Pkg with number " << currentIndexVariable << " of " << currentCountVariables << " saved in csv" << std::endl;
 						std::cout << "Name of pkg: " << name << std::endl;
 						if(currentIndexVariable < currentCountVariables) {
