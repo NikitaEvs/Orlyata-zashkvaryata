@@ -52,7 +52,7 @@ int currentIndexMeasure = 0;
 int currentCountVariables = 0;
 int currentCountMeasures = 0;
 //std::string pkgHat = "1,2,3,4,5,6,7,8,9,10,11,12,Ans" + '\n';
-std::string currentPkg = "1,2,3,4,5,6,7,8,9,10,11,12,Ans" + '\n';
+std::string currentPkg = std::string("1,2,3,4,5,6")+",7,8,9,10"+",11,12,Ans" + '\n';;
 std::string currentDatasetName = "";
 
 enum action_type {
