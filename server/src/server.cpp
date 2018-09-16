@@ -698,7 +698,7 @@ class pineServer {
 						currentServer.send(itMap -> second, "kek", websocketpp::frame::opcode::text, errCode);
 					} */
 				}
-				sleep(10);
+				sleep(3);
 			}
 		}
 
