@@ -51,7 +51,7 @@ int currentIndexVariable = 0;
 int currentIndexMeasure = 0;
 int currentCountVariables = 0;
 int currentCountMeasures = 0;
-const std::string pkgHat = "1,2,3,4,5,6,7,8,9,10,11,12,Ans" + '\n';
+std::string pkgHat = "1,2,3,4,5,6,7,8,9,10,11,12,Ans" + '\n';
 std::string currentPkg = pkgHat;
 std::string currentDatasetName = "";
 
@@ -830,11 +830,11 @@ class pineServer {
 				database pineBase;
 				pineBase.getAns();
 				if((currentCountVariables > 0) && (currentIndexVariable < currentCountVariables)) {
-					std::cout << "Current index: " << currentIndexMeasure << " Current count: " << currentCountMeasures << std::endl;
-					if(currentIndexMeasure == currentCountMeasures) {
+					std::cout << "Current index: " << currentIndexMeasure + 1 << " Current count: " << currentCountMeasures << std::endl;
+					if(currentIndexMeasure + 1 == currentCountMeasures) {
 						// Save one pkg
 						std::string name = "";
-						if(currentIndexVariable = 0) {
+						if(currentIndexVariable == 0) {
 							name += "boris/learn/" + currentDatasetName+ "/out.csv";
 						} else {
 							name += "boris/learn/" + currentDatasetName+ "/out" + std::to_string(currentIndexVariable) + ".csv";
@@ -856,7 +856,7 @@ class pineServer {
 					} else {
 						// Add measure to pkg
 						std::string jValues = jIn["data"]["values"];
-						std::string measure = jValues.substr(27, 1000) + '\n'; // 27 - number first val (without header)
+						std::string measure = jValues.substr(27, 1000) + std::to_string(currentIndexVariable) + '\n'; // 27 - number first val (without header)
 						std::cout << "Current measure: " << measure << std::endl;
 						currentPkg += measure;
 						currentIndexMeasure++;
