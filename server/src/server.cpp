@@ -844,6 +844,11 @@ class pineServer {
 						currentIndexVariable++;
 						currentIndexMeasure = 0;
 						currentPkg = pkgHat;
+						std::cout << "Pkg with number " << currentIndexVariable << " of " << currentCountVariables << " saved in csv" << std::endl;
+						std::cout << "Name of pkg: " << name << std::endl;
+						std::cout << "Please, plug new combination. When you are ready press ENTER" << std::endl;
+						std::string tempBuffer;
+						getline(std::cin, tempBuffer);
 					} else {
 						// Add measure to pkg
 						std::string jValues = jIn["data"]["values"];
@@ -1035,7 +1040,7 @@ int main(int argc, char *argv[]) {
 			currentCountVariables = countVariables;
 			currentCountMeasures = countMeasures;
 			std::cout << "Last step: type name of new dataset (check exists datasets)" << std::endl;
-			std::cout << "name: " << std::endl;
+			std::cout << "name: ";
 			getline(std::cin, input);
 			currentDatasetName = input;
 			std::cout << "************IMPORTANT************" << std::endl;
