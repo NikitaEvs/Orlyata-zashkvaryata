@@ -31,6 +31,7 @@ using json = nlohmann::json;
 typedef websocketpp::server<websocketpp::config::asio> server;
 
 std::string debug = "DEBUG"; // On debug mode with start of program for e.g. ./server DEBUG in directory of project
+std::string learn = "AUTOLEARN"; // On learning mode with start of program e.g. ./server AUTOLEARN in directory of project
 /* Command for DEBUG mode */
 std::string drop = "DROP"; // Drop all database
 std::string add = "ADD"; // Start add PineBox mode
@@ -44,6 +45,15 @@ std::string giveCount = "GIVEC"; // Give count of elements in database
 const int port = 8080;
 bool valDatabaseUpdate = false;
 std::ofstream fOut;
+
+/* Variable for experimental real-time dataset creating */
+int currentIndexVariable = 0;
+int currentIndexMeasure = 0;
+int currentCountVariables = 0;
+int currentCountMeasures = 0;
+const std::string pkgHat = "1,2,3,4,5,6,7,8,9,10,11,12,Ans" + '\n';
+std::string currentPkg = pkgHat;
+std::string currentDatasetName = "";
 
 enum action_type {
 	SUBSCRIBE,
@@ -819,6 +829,29 @@ class pineServer {
 				msgOut = jOut.dump();
 				database pineBase;
 				pineBase.getAns();
+				if((currentCountVariables > 0) && (currentIndexVariable < currentCountVariables)) {
+					if(currentIndexMeasure = currentCountMeasures) {
+						// Save one pkg
+						std::string name = "";
+						if(currentIndexVariable = 0) {
+							name += "boris/learn/" + currentDatasetName+ "/out.csv";
+						} else {
+							name += "boris/learn/" + currentDatasetName+ "/out" + std::to_string(currentIndexMeasure) + ".csv";
+						}
+						fOut.open(name);
+						fOut << currentPkg;
+						fOut.close();
+						currentIndexVariable++;
+						currentIndexMeasure = 0;
+						currentPkg = pkgHat;
+					} else {
+						// Add measure to pkg
+						std::string jValues = jIn["data"]["values"];
+						std::string measure = jValues.substr(27, 1000) + '\n'; // 27 - number first val (without header)
+						currentPkg += measure;
+						currentIndexMeasure++;
+					}
+				}
 			}
 		} 
 		
@@ -845,8 +878,9 @@ class pineServer {
 
 int main(int argc, char *argv[]) {
 	std::cout << "FOR START DEBUG MODE TYPE DEBUG IN CONSOLE ARGUMENT" << std::endl;
+	std::cout << "FOR START AUTOLEARN MODE TYPE AUTOLEARN IN CONSOLE ARGUMENT" << std::endl;
 	database pineBase;
-	/* DEBUG MODE */
+	/* DEBUG&LEARNING MODE */
 	if(argc > 1){
 		std::string in = argv[1];
 		if(in == debug) {
@@ -981,9 +1015,41 @@ int main(int argc, char *argv[]) {
 					std::cout << "Unknown debug command. Type HELP for list of all command" << std::endl;
 				}
 			}
+		} else if(in == learn){
+			std::string input = "";
+			int countVariables = 0;
+			int countMeasures = 0;
+			std::cout << "*******************************" << std::endl;
+			std::cout << "***CONFIG AUTO LEARNING MODE***" << std::endl;
+			std::cout << "***********!WARNING!***********" << std::endl;
+			std::cout << "**IT'S EXPERIMENTAL FUNCTION!**" << std::endl;
+			std::cout << "*******************************" << std::endl;
+			std::cout << "First step: type count of variable of connection" << std::endl;
+			std::cout << "count of variable: ";
+			getline(std::cin, input);
+			countVariables = std::stoi(input);
+			std::cout << "Second step: type count of measures package for each connection (recommend 100)" << std::endl;
+			std::cout << "count of measures: ";
+			getline(std::cin, input);
+			countMeasures = std::stoi(input);
+			currentCountVariables = countVariables;
+			currentCountMeasures = countMeasures;
+			std::cout << "Last step: type name of new dataset (check exists datasets)" << std::endl;
+			std::cout << "name: " << std::endl;
+			getline(std::cin, input);
+			currentDatasetName = input;
+			std::cout << "************IMPORTANT************" << std::endl;
+			std::cout << "INSTRUCTION FOR AUTO LEARN MODE: " << std::endl;
+			std::cout << "1) Connect first combination" << std::endl;
+			std::cout << "2) Wait for measure of amperage end (for first combination), you see message" << std::endl;
+			std::cout << "3) Plug next combination" << std::endl;
+			std::cout << "4) Repeat count of variable times" << std::endl;
+			std::cout << "PRESS ENTER IF YOU ARE READY" << std::endl;
+			getline(std::cin, input);
+			std::cout << "AUTOLEARN MODE START" << std::endl;
 		}
 	}
-	/* END DEBUG MODE */
+	/* END DEBUG&LEARNING MODE */
 	try{
 		pineServer pineServer;
 		thread thread(bind(&pineServer::messages_process, &pineServer)), threadOut(bind(&pineServer::messages_out, &pineServer));
