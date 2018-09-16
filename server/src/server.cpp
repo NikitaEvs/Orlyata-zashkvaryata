@@ -830,7 +830,7 @@ class pineServer {
 				database pineBase;
 				pineBase.getAns();
 				if((currentCountVariables > 0) && (currentIndexVariable < currentCountVariables)) {
-					if(currentIndexMeasure = currentCountMeasures) {
+					if(currentIndexMeasure == currentCountMeasures) {
 						// Save one pkg
 						std::string name = "";
 						if(currentIndexVariable = 0) {
@@ -856,6 +856,7 @@ class pineServer {
 						// Add measure to pkg
 						std::string jValues = jIn["data"]["values"];
 						std::string measure = jValues.substr(27, 1000) + '\n'; // 27 - number first val (without header)
+						std::cout << "Current measure: " << measure << std::endl;
 						currentPkg += measure;
 						currentIndexMeasure++;
 					}
