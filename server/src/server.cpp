@@ -844,7 +844,7 @@ class pineServer {
 						fOut.close();
 						currentIndexVariable++;
 						currentIndexMeasure = 0;
-						currentPkg = "1,2,3,4,5,6,7,8,9,10,11,12,Ans" + '\n';
+						currentPkg = std::string("1,2,3,4,5,6")+",7,8,9,10"+",11,12,Ans" + '\n';
 						std::cout << "PkgHat in current pkg: " << currentPkg << std::endl;
 						std::cout << "Pkg with number " << currentIndexVariable << " of " << currentCountVariables << " saved in csv" << std::endl;
 						std::cout << "Name of pkg: " << name << std::endl;
