@@ -1,6 +1,6 @@
 /ans/ans*
 /data/data*
-#CMakeCache.txt
+CMakeCache.txt
 *.cmake
 #*.sqlite
 Makefile
