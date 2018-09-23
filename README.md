@@ -23,6 +23,6 @@ Run server via script with param `name` which contains name of machine learning 
 
 Note: you can check list of current machine learning algorithms using `ls boris`
 
-## Server quick start guide for MacOS (really not quick :green apple:)
+## Server quick start guide for MacOS (really not quick :green_apple:)
 Use Linux
 
