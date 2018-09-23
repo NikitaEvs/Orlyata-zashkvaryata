@@ -1,0 +1,30 @@
+###############################################
+#     Configure workspace for PineServer      #
+# _____  _                                    #
+#|  _  \(_)                            _      #
+#| |_) | _ ____  ___  __ _ ____  ____ | | ___ #
+#| ____/| |  _ \/ _ \/ _` |  _ \|  _ \| |/ _ \#
+#| |    | | | |   __/ (_| | |_) | |_) | |  __/#
+#|_|    |_|_| |_\___|\__,_| ___/| ___/|_|\___|#
+#                         | |   | |           #
+#                         |_|   |_|           #
+###############################################
+
+#!/bin/bash       
+echo ' _____  _                                    '
+echo '|  _  \(_)                            _      '
+echo '| |_) | _ ____  ___  __ _ ____  ____ | | ___ '
+echo '| ____/| |  _ \/ _ \/ _` |  _ \|  _ \| |/ _ \'
+echo '| |    | | | |   __/ (_| | |_) | |_) | |  __/'
+echo '|_|    |_|_| |_\___|\__,_| ___/| ___/|_|\___|'
+echo '                         | |   | |           '
+echo '                         |_|   |_|           '
+
+echo '---Start configure workspace ^_^---'
+sudo apt-get install python3-pip
+pip3 install --upgrade pip
+sudo sed -i '9s/from pip import main/from pip import __main__/' /usr/bin/pip3
+sudo sed -i '11s/sys.exit(main())/sys.exit(__main__._main())/' /usr/bin/pip3
+sudo pip3 install numpy
+sudo pip3 install pandas
+sudo pip3 install catboost 
