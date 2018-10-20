@@ -20,10 +20,15 @@ echo '|_|    |_|_| |_\___|\__,_| ___/| ___/|_|\___|'
 echo '                         | |   | |           '
 echo '                         |_|   |_|           '
 
+trap 'echo ***SERVER SHUTTING DOWN*** && kill $(jobs -p)' EXIT
+
 echo '---Start server, please check that you are type name of ML algroithm in param of script!---'
+
 cd boris
 python3 work_boris.py $1 &
 cd ..
-echo '---ML algorithm is running---'
-./server 
+echo '---ML algorithm configure---'
+./server &
+
+cat
 

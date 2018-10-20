@@ -1,0 +1,55 @@
+###############################################
+#      Configure database for PineServer      #
+# _____  _                                    #
+#|  _  \(_)                            _      #
+#| |_) | _ ____  ___  __ _ ____  ____ | | ___ #
+#| ____/| |  _ \/ _ \/ _` |  _ \|  _ \| |/ _ \#
+#| |    | | | |   __/ (_| | |_) | |_) | |  __/#
+#|_|    |_|_| |_\___|\__,_| ___/| ___/|_|\___|#
+#                         | |   | |           #
+#                         |_|   |_|           #
+###############################################
+
+#!/bin/bash
+echo ' _____  _                                    '
+echo '|  _  \(_)                            _      '
+echo '| |_) | _ ____  ___  __ _ ____  ____ | | ___ '
+echo '| ____/| |  _ \/ _ \/ _` |  _ \|  _ \| |/ _ \'
+echo '| |    | | | |   __/ (_| | |_) | |_) | |  __/'
+echo '|_|    |_|_| |_\___|\__,_| ___/| ___/|_|\___|'
+echo '                         | |   | |           '
+echo '                         |_|   |_|           '
+
+echo 'Start configure database environment ^_^'
+echo '***Start configure libpqxx library***'
+
+cd
+wget http://pqxx.org/download/software/libpqxx/libpqxx-4.0.tar.gz
+tar xvfz libpqxx-4.0.tar.gz
+cd libpqxx-4.0
+./configure
+make
+make install
+cd
+
+echo '*** Configure libpqxx finish ***'
+echo '***Start configure PostgreSQL***'
+
+sudo apt-get update
+sudo apt-get install postgresql postgresql-contrib
+sudo -u postgres createuser -s --superuser pinedb
+sudo -u postgres createdb pinedb
+sudo adduser pinedb
+sudo -u pinedb git clone https://github.com/NikitaEvs/sql.git
+sudo -u pinedb psql -f /home/pinedb/sql/script/databaseInit.sql
+
+echo '***               Create database finish               ***'
+echo '***Start configure crontab tasks for auto edit database***'
+
+cd server/pineutil/scripts
+crontab schedule
+
+echo '***       Finish configure crontab       ***'
+echo '***Finish configure database environment!***'
+
+

@@ -1,0 +1,26 @@
+{
+  "0": {
+    "types": ["null"],
+    "values": ["1.0"]
+  },
+  "1": {
+    "types": ["phone"],
+    "values": ["1.0"]
+  },
+  "2": {
+    "types": ["laptop"],
+    "values": ["1.0"]
+  },
+  "3": {
+    "types": ["phone", "laptop"],
+    "values": ["0.244", "0.7558"]
+  },
+  "4": {
+    "types": ["phone", "phone"],
+    "values": ["0.5", "0.5"]
+  },
+  "5": {
+    "types": ["phone", "phone", "laptop"],
+    "values": ["0.1962", "0.1962", "0.6077"]
+  }
+}
