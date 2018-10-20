@@ -51,7 +51,7 @@ echo '***Start configure crontab tasks for auto edit database***'
 cd
 cd Orlyata-zashkvaryata/server/pineutil/scripts
 crontab schedule
-cd init
+cd ../init
 ./init
 
 echo '***       Finish configure crontab       ***'
