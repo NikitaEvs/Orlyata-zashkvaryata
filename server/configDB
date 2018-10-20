@@ -48,7 +48,7 @@ sudo -u pinedb psql -f /home/pinedb/sql/script/databaseInit.sql
 echo '***               Create database finish               ***'
 echo '***Start configure crontab tasks for auto edit database***'
 
-cd server/pineutil/scripts
+cd Orlyata-zashkvaryata/server/pineutil/scripts
 crontab schedule
 
 echo '***       Finish configure crontab       ***'
