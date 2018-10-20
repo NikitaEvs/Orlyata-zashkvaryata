@@ -31,6 +31,7 @@ cd libpqxx-4.0
 make
 make install
 cd
+rm -rf libpqxx-4.0.tar.gz
 
 echo '*** Configure libpqxx finish ***'
 echo '***Start configure PostgreSQL***'
@@ -40,7 +41,8 @@ sudo apt-get install postgresql postgresql-contrib
 sudo -u postgres createuser -s --superuser pinedb
 sudo -u postgres createdb pinedb
 sudo adduser pinedb
-sudo -u pinedb git clone https://github.com/NikitaEvs/sql.git
+cd ../home/pinedb
+git clone https://github.com/NikitaEvs/sql.git
 sudo -u pinedb psql -f /home/pinedb/sql/script/databaseInit.sql
 
 echo '***               Create database finish               ***'
