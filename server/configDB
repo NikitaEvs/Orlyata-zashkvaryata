@@ -34,6 +34,7 @@ sudo adduser pinedb
 echo '***Start configure libpqxx library***'
 
 cd
+sudo apt-get install libpq-dev
 wget http://pqxx.org/download/software/libpqxx/libpqxx-4.0.tar.gz
 tar xvfz libpqxx-4.0.tar.gz
 cd libpqxx-4.0
@@ -46,7 +47,7 @@ rm -rf libpqxx-4.0.tar.gz
 echo '*** Configure libpqxx finish ***'
 echo '***     Create database!     ***'
 
-cd ../home/pinedb
+cd /home/pinedb
 git clone https://github.com/NikitaEvs/sql.git
 sudo -u pinedb psql -f /home/pinedb/sql/script/databaseInit.sql
 
