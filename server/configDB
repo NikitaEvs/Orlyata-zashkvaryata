@@ -40,6 +40,7 @@ sudo apt-get update
 sudo apt-get install postgresql postgresql-contrib
 sudo -u postgres createuser -s --superuser pinedb
 sudo -u postgres createdb pinedb
+sudo -u postgres psql -U postgres -d postgres -c "alter user postgres with password 'pinebobr';"
 sudo adduser pinedb
 cd ../home/pinedb
 git clone https://github.com/NikitaEvs/sql.git
