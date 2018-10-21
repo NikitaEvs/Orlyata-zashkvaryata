@@ -33,5 +33,4 @@ Use Linux
 
 ## Server documentation
 
-Documentation in markdown format coming soon, but you can read simple text (only in Russian for now)
-[Simple text documentation](documentation)
+Documentation in markdown format coming soon, but you can read [Simple text documentation](documentation) (only in Russian for now)
