@@ -16,6 +16,11 @@ Configure your workspace via script:
 ./configWS
 ```
 
+Install&configure database
+```
+./configDB
+```
+
 Run server via script with param `name` which contains name of machine learning algorithm
 ```
 ./run name
@@ -26,3 +31,7 @@ Note: you can check list of current machine learning algorithms using `ls boris`
 ## Server quick start guide for MacOS (really not quick :green_apple:)
 Use Linux
 
+## Server documentation
+
+Documentation in markdown format coming soon, but you can read simple text (only in Russian for now)
+[Simple text documentation](documentation)
