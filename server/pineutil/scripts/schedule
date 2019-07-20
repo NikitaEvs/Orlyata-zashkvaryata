@@ -1,0 +1,4 @@
+SHELL=/bin/bash
+MAILTO=root
+0 * * * * ~/pineutil/scripts/hour.bash
+0 0 * * * ~/pineutil/scripts/day.bash
