@@ -1,4 +1,7 @@
 # PineApple server
+- [https://github.com/NikitaEvs/PineAVRTemp](Microcontroller script (C))
+- [https://github.com/NikitaEvs/PineApp](Mobile app (Java))
+- [https://github.com/NikitaEvs/PineClient](Transfer controller script (C++))
 ## Server quick start guide for Linux (really quick :boom:)
 First of all, clone directory to your local machine:
 ```
