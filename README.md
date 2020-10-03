@@ -2,13 +2,12 @@
 ## Server quick start guide for Linux (really quick :boom:)
 First of all, clone directory to your local machine:
 ```
-git clone https://github.com/NikitaEvs/Orlyata-zashkvaryata.git
+git clone https://github.com/NikitaEvs/PineServer.git
 ```
-Note: if you get an error use `sudo apt-get install git`
 
 Go to work directory:
 ```
-cd Orlyata-zashkvaryata/server
+cd PineServer/server
 ```
 
 Configure your workspace via script:
