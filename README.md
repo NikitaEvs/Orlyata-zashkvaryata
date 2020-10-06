@@ -1,38 +1,23 @@
-# PineApple server
+# PineApple project
+---
+*Official name: "Analysis of the load structure of the consumer"*.
+![logo](https://i.imgur.com/9qy6XhR.png)
+
+## Summary
+Our system allows consumers to easily control the consumption patterns of their power grid. Collect detailed consumption statistics for each load separately and identify inefficient and prohibited loads.
+
+## Target audience
+![target audience](https://i.imgur.com/4NKhfrk.png) 
+
+## System architecture
+![architecure](https://i.imgur.com/YlcOLUZ.png)
+
+## System demo
+![web](https://i.imgur.com/4GBM5dD.png)
+![app](https://i.imgur.com/Quoil95.png)
+
+
+# Other source repositories
 - [Microcontroller script (C)](https://github.com/NikitaEvs/PineAVRTemp)
 - [Mobile app (Java)](https://github.com/NikitaEvs/PineApp)
 - [Transfer controller script (C++)](https://github.com/NikitaEvs/PineClient)
-## Server quick start guide for Linux (really quick :boom:)
-First of all, clone directory to your local machine:
-```
-git clone https://github.com/NikitaEvs/PineServer.git
-```
-
-Go to work directory:
-```
-cd PineServer/server
-```
-
-Configure your workspace via script:
-```
-./configWS
-```
-
-Install&configure database
-```
-./configDB
-```
-
-Run server via script with param `name` which contains name of machine learning algorithm
-```
-./run name
-```
-
-Note: you can check list of current machine learning algorithms using `ls boris`
-
-## Server quick start guide for MacOS (really not quick :green_apple:)
-Use Linux
-
-## Server documentation
-
-Documentation in markdown format coming soon, but you can read [simple text documentation](documentation) (only in Russian for now)
